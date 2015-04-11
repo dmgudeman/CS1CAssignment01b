@@ -40,9 +40,9 @@ public class Foothill
       ArrayList<Integer> dataSet = new ArrayList<Integer>();
     //  ArrayList<Sublist> choices = new ArrayList<Sublist>();
 
-      int  max = 0, kBest = 0, masterSum;
-      boolean foundPerfect;
-
+      int  max = 0, kBest = 0;
+     // boolean foundPerfect;
+      
       dataSet.add(2);
       dataSet.add(12);
       dataSet.add(22);
@@ -55,10 +55,10 @@ public class Foothill
 
       ArrayList<Sublist> powerset = makePowerset(dataSet);
 
-      for (int i = 0; i < powerset.size(); i++)
-      {
+  //    for (int i = 0; i < powerset.size(); i++)
+   //   {
          // powerset.get(i).showSublist();
-      }
+   //   }
 
       for (int i = 0; i < powerset.size(); i++)
       {
@@ -67,6 +67,7 @@ public class Foothill
          if (sum == target)
          {
             kBest = i;
+            System.out.println("hi there");
             break;
          } else
          {
