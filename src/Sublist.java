@@ -53,6 +53,7 @@ class Sublist implements Cloneable
       for (int i = 0; i < indices.size(); i++) {
          int indice = indices.get(i);
          System.out.print(originalObjects.get(indice) + ", ");
+       
       }
       System.out.println("}");
    }
