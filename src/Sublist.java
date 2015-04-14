@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 
+import cs_1c.iTunesEntry;
+
 class Sublist implements Cloneable
 {
    private int sum = 0;
-   private ArrayList<Integer> originalObjects;
-   private ArrayList<Integer> indices;
+   private ArrayList<iTunesEntry> originalObjects;
+   private ArrayList<Integer> indices = new ArrayList<Integer>();
    
    public ArrayList<Integer> getIndices() {
       return indices;
@@ -15,17 +17,16 @@ class Sublist implements Cloneable
    }
    
    // constructor creates an empty Sublist (no indices)
-   public Sublist(ArrayList<Integer> list) 
+   public Sublist(ArrayList<iTunesEntry> list) 
    {
       sum = 0;
       originalObjects = list;
-      indices = new ArrayList<Integer>();
    }
    
    int getSum() {
       sum = 0;
       for (int i = 0; i < indices.size(); i++) {
-         sum += originalObjects.get(indices.get(i));
+         sum += originalObjects.get(indices.get(i)).getTime();
       }
       return sum;
     }
@@ -37,22 +38,23 @@ class Sublist implements Cloneable
       Sublist newObject = (Sublist)super.clone();
       // deep copy
       newObject.indices = (ArrayList<Integer>)indices.clone();
-      
       return newObject;
    }
    
    Sublist addItem( int indexOfItemToAdd ) throws CloneNotSupportedException
    { 
-      indices.add(indexOfItemToAdd);
-      Sublist s = (Sublist) clone(); // maybe?
-      return s;
+     indices.add(indexOfItemToAdd);
+    Sublist s = (Sublist) clone(); // maybe?
+     return s;
+     
    }
      
    void showSublist(){ 
       System.out.print("{");
       for (int i = 0; i < indices.size(); i++) {
-         int indice = indices.get(i);
-         System.out.print(originalObjects.get(indice) + ", [" + indice + "] \n");
+         Integer indice = indices.get(i);
+         System.out.print(i + ", [" + indice + "] \n");
+         System.out.print(i + ", [" + originalObjects.get(indice).getTitle() + "] \n");
        
       }
       System.out.println("}");

@@ -1,0 +1,190 @@
+#
+Carrie Underwood
+Cowboy Casanova
+236
+
+#
+Carrie Underwood
+Quitter
+220
+
+#
+Rihanna
+Russian Roulette
+228
+
+#
+Foo Fighters
+All My Life
+263
+
+#
+Foo Fighters
+Monkey Wrench
+230
+
+#
+Eric Clapton
+Pretending
+283
+
+#
+Eric Clapton
+Bad Love
+308
+
+#
+Howlin' Wolf
+Everybody's In The Mood
+178
+
+#
+Howlin' Wolf
+Well That's All Right
+175
+
+#
+Reverend Gary Davis
+Samson and Delilah
+216
+
+#
+Reverend Gary Davis
+Twelve Sticks
+194
+
+#
+Roy Buchanan
+Hot Cha
+208
+
+#
+Roy Buchanan
+Green Onions
+443
+
+#
+Janiva Magness
+I'm Just a Prisoner
+230
+
+#
+Janiva Magness
+You Were Never Mine
+276
+
+#
+John Lee Hooker
+Hobo Blues
+187
+
+#
+John Lee Hooker
+I Can't Quit You Baby
+182
+
+#
+Snoop Dogg
+That's The Homie
+343
+
+#
+Snoop Dogg
+Gangsta Luv
+257
+
+#
+The Rubyz
+Ladies and Gentleman
+201
+
+#
+The Rubyz
+Watch the Girl
+192
+
+#
+Veggie Tales
+Donuts for Benny
+184
+
+#
+Veggie Tales
+Our Big Break
+69
+
+#
+Berliner Philharmoniker
+Brahms: Symphony No. 1 in C Minor Op. 68
+839
+
+#
+Berliner Philharmoniker
+Brahms: Symphony No. 4 in E Minor Op. 98
+800
+
+#
+Yo-yo Ma
+Bach: Suite for Cello No. 1 in G Major Prelude
+141
+
+#
+Yo-yo Ma
+Simple Gifts
+154
+
+#
+Ry Cooter
+Alimony
+175
+
+#
+Ry Cooter
+France Chance
+168
+
+#
+Aaron Watson
+The Road
+204
+
+#
+Terra Incognita
+Clone
+298
+
+#
+Terra Incogni
+Lizard Skin
+270
+
+#
+Blue Record
+Bullhead's Psalm
+79
+
+#
+Blue Record
+Ogeechee Hymnal
+155
+
+#
+Mastadon
+Oblivion
+348
+
+#
+Mastadon
+The Bit
+295
+
+#
+Sean Kingston
+Fire Burning
+239
+
+#
+Sean Kingston
+My Girlfriend
+204
+
