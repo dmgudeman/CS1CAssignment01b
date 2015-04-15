@@ -8,7 +8,45 @@ import cs_1c.iTunesEntryReader;
 //------------------------------------------------------
 public class Foothill
 {
-   public static ArrayList<Sublist> getPowerSetUpToTarget(
+   // ------- main --------------
+   public static void main(String[] args) throws Exception
+   {
+      boolean checkLimitList = false;
+      int target = 1896;
+
+      // for formatting and timing
+      NumberFormat tidy = NumberFormat.getInstance(Locale.US);
+      tidy.setMaximumFractionDigits(4);
+      long startTime, stopTime;
+
+      // read the iTunes Data
+      iTunesEntryReader tunesInput = new iTunesEntryReader("itunes_file.txt");
+
+      // test the success of the read:
+      if (tunesInput.readError())
+      {
+         System.out.println("couldn't open " + tunesInput.getFileName()
+               + " for input.");
+         return;
+      }
+      startTime = System.nanoTime();
+      ArrayList<iTunesEntry> tunes = tunesInput.getTunes();
+      checkLimitList = checkLimitList(tunes, target);
+
+      if (checkLimitList)
+      {
+         System.out.println("Creating powerset...");
+         ArrayList<Sublist> powerset = makePowerset(tunes, target);
+
+      }
+      stopTime = System.nanoTime();
+
+      // report algorithm time
+      System.out.println("\nAlgorithm elapsed time: "
+            + tidy.format((stopTime - startTime) / 1e9) + " seconds.\n");
+   }
+
+   public static ArrayList<Sublist> makePowerset(
          ArrayList<iTunesEntry> list, int target)
          throws CloneNotSupportedException
    {
@@ -49,48 +87,6 @@ public class Foothill
       return powerset;
    }
 
-
-
-   // ------- main --------------
-   public static void main(String[] args) throws Exception
-   {
-      boolean checkLimitList = false;
-
-      int target = 2000;
-     
-      // for formatting and timing
-      NumberFormat tidy = NumberFormat.getInstance(Locale.US);
-      tidy.setMaximumFractionDigits(4);
-      long startTime, stopTime;
-
-      // read the iTunes Data
-      iTunesEntryReader tunesInput = new iTunesEntryReader("itunes_file.txt");
-
-      // test the success of the read:
-      if (tunesInput.readError())
-      {
-         System.out.println("couldn't open " + tunesInput.getFileName()
-               + " for input.");
-         return;
-      }
-      startTime=System.nanoTime();
-      ArrayList<iTunesEntry> tunes = tunesInput.getTunes();
-      checkLimitList = checkLimitList(tunes, target);
-
-      if (checkLimitList)
-      {
-         System.out.println("Creating powerset...");
-         ArrayList<Sublist> powerset = getPowerSetUpToTarget(tunes, target);
-
-      }
-      stopTime = System.nanoTime();
-
-      // report algorithm time
-      System.out.println("\nAlgorithm elapsed time: "
-         + tidy.format((stopTime - startTime) / 1e9)
-         + " seconds.\n");
-   }
-
    private static int findKBest(int target, ArrayList<Sublist> powerset)
    {
       int max = 0;
@@ -118,7 +114,6 @@ public class Foothill
                System.out.println("inside the sum > max loop target = "
                      + target + " sum is: " + sum + " max is " + max
                      + " powerest size = " + powerset.size());
-               
 
             }
          }
@@ -130,14 +125,14 @@ public class Foothill
    public static boolean checkLimitList(ArrayList<iTunesEntry> list, int target)
          throws CloneNotSupportedException
    {
-      
+
       {
          int limitSum = 0;
 
          for (int i = 0; i < list.size(); i++)
          {
             limitSum += list.get(i).getTime();
-           
+
          }
          if (limitSum <= target)
          {
