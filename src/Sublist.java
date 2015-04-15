@@ -12,8 +12,9 @@ class Sublist implements Cloneable
       return indices;
    }
    
-   public void setIndices(ArrayList<Integer> indices) {
+   public boolean setIndices(ArrayList<Integer> indices) {
       this.indices = indices;
+      return true;
    }
    
    // constructor creates an empty Sublist (no indices)
