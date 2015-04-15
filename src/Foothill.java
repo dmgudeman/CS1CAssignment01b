@@ -10,16 +10,16 @@ public class Foothill
 {
    public static ArrayList<Sublist> getPowerSetUpToTarget(ArrayList<iTunesEntry>
       list, int target) throws CloneNotSupportedException
-   {
+   {  
       ArrayList<Sublist> powerset = new ArrayList<Sublist>();
       powerset.add(new Sublist(list)); // add the empty set
-
+      int kBest =0 ;
       // for every item in the original list
-      for (int i = 0; i < list.size(); i++)
+      for (int i = 0; i < 300; i++) //list.size(); i++)
       {
-
+         
          ArrayList<Sublist> newPowerset = new ArrayList<Sublist>();
-
+         System.out.println("target = " + target + "; sum = " + powerset.get(kBest).getSum() + "kBest = " + kBest + "highest idice = " + newPowerset.size());
          for (Sublist subset : powerset)
          {
             
@@ -31,7 +31,8 @@ public class Foothill
             newSubset.getIndices().addAll(subset.getIndices());
             newSubset.addItem(i); //
             newPowerset.add(newSubset);
-            int kBest = findKBest(target, powerset);
+            kBest = findKBest(target, powerset);
+            
             if (powerset.get(kBest).getSum() == target) {
                return newPowerset;
             }
@@ -50,16 +51,17 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      ArrayList<iTunesEntry> dataSet = new ArrayList<iTunesEntry>();
+    //  ArrayList<iTunesEntry> dataSet = new ArrayList<iTunesEntry>();
       //ArrayList<Sublist> powerset = new ArrayList<Sublist>();
-      int k, j, numSets, arraySize, masterSum;
-      int target = 3000;
-      boolean foundPerfect;
+      
+   //   int k, j, numSets, arraySize, masterSum;
+      int target = 2000;
+     // boolean foundPerfect;
 
       // for formatting and timing
       NumberFormat tidy = NumberFormat.getInstance(Locale.US);
       tidy.setMaximumFractionDigits(4);
-      long startTime, stopTime;
+   //   long startTime, stopTime;
 
       // read the iTunes Data
       iTunesEntryReader tunesInput = new iTunesEntryReader("itunes_file.txt");
@@ -127,8 +129,9 @@ public class Foothill
    {
       int max = 0;
       int kBest = 0;
+      int loop = powerset.size();
       System.out.println("Calculating kbest...");
-      for (int i = 0; i < powerset.size(); i++)
+      for (int i = 0; i < loop; i++)
       {
          Sublist set = powerset.get(i);
          int sum = set.getSum();
@@ -143,9 +146,11 @@ public class Foothill
          } else
          {
             if (sum > max && sum <= target)
-            {
+            {  
                max = sum;
                kBest = i;
+               System.out.println("inside the sum > max loop target = " + target + " sum is: " + sum + " max is " + max + " powerest size = " +  powerset.size());
+               
             }
          }
       }

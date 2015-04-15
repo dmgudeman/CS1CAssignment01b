@@ -54,7 +54,7 @@ class Sublist implements Cloneable
       for (int i = 0; i < indices.size(); i++) {
          Integer indice = indices.get(i);
          System.out.print(i + ", [" + indice + "] \n");
-         System.out.print(i + ", [" + originalObjects.get(indice).getTitle() + "] \n");
+         System.out.print(i + ". TITLE [" + originalObjects.get(indice).getTitle() + "]  ARTIST [" + originalObjects.get(indice).getArtist() + "]  TIME [" + originalObjects.get(indice).getTime() + "] \n");
        
       }
       System.out.println("}");
