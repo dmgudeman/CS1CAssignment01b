@@ -49,7 +49,7 @@ public class Foothill
 
    // ------- main --------------
    public static void main(String[] args) throws Exception
-   {
+   {    boolean checkLimitList = false;
 
     //  ArrayList<iTunesEntry> dataSet = new ArrayList<iTunesEntry>();
       //ArrayList<Sublist> powerset = new ArrayList<Sublist>();
@@ -75,6 +75,11 @@ public class Foothill
       }
       
       ArrayList<iTunesEntry> tunes = tunesInput.getTunes();
+      checkLimitList = checkLimitList(tunes, target);
+
+      if (checkLimitList)
+      {
+
       System.out.println("Creating powerset...");
       ArrayList<Sublist> powerset = getPowerSetUpToTarget(tunes, target);
       
@@ -124,7 +129,7 @@ public class Foothill
 //         System.out.println(dataSet.get(i).getTime());
 //      }
    }
-
+   }
    private static int findKBest(int target, ArrayList<Sublist> powerset)
    {
       int max = 0;
@@ -155,6 +160,30 @@ public class Foothill
          }
       }
       return kBest;
+   }
+   
+   public static boolean checkLimitList(ArrayList<iTunesEntry> list, int target)
+         throws CloneNotSupportedException
+   {
+      // ArrayList<Sublist> powerset = new ArrayList<Sublist>();
+      // powerset.add(new Sublist(list)); // add the empty set
+      {
+         int limitSum = 0;
+
+         for (int i = 0; i < list.size(); i++)
+         {
+            limitSum += list.get(i).getTime();
+            // System.out.println(limitSum);
+         }
+         if (limitSum <= target)
+         {
+            System.out.println("The most this grouping can sum to is: "
+                  + limitSum);
+            return false;
+         }
+         return true;
+      }
+
    }
 }
 
