@@ -23,7 +23,7 @@ class Sublist implements Cloneable
       originalObjects = list;
    }
    
-   int getSum() {
+    int getSum() {
       sum = 0;
       for (int i = 0; i < indices.size(); i++) {
          sum += originalObjects.get(indices.get(i)).getTime();
