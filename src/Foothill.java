@@ -54,7 +54,7 @@ public class Foothill
       powerset.add(new Sublist(list)); // add the empty set
       int maxSum = 0;
       int kBest = 0;
-      int kTemp = 0;
+ 
      
       while (maxSum <= target)
          {
@@ -65,7 +65,7 @@ public class Foothill
 
                 for (Sublist subset : powerset)
                 {  
-                   kBest = kTemp;
+             
                
             
                    // copy all of the current powerset's subsets
@@ -77,19 +77,16 @@ public class Foothill
                    newSubset.addItem(i); //
            
                      newPowerset.add(newSubset);
-                    kTemp = findKBest(target, powerset);
+                    kBest = findKBest(target, powerset);
            
-                    System.out.println("This is kTemp " + kTemp);         
-                }    
+                    System.out.println("This is kTemp " + kBest);         
+                 }    
                 powerset = newPowerset;
-             }  
-           
+               }  
+            
            }
            return powerset;
       }
-
-      
-
 
    /**
     * This filters the powerset for the highest value
