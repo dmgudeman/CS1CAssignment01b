@@ -12,7 +12,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
       boolean checkLimitList = false;
-      int target = 1896;
+      int target = 1000;
 
       // for formatting and timing
       NumberFormat tidy = NumberFormat.getInstance(Locale.US);
@@ -29,10 +29,15 @@ public class Foothill
                + " for input.");
          return;
       }
+      // start timer
       startTime = System.nanoTime();
+      
+      // collect the dataset
       ArrayList<iTunesEntry> tunes = tunesInput.getTunes();
+     
+      // check to make sure there adequate resources in data set
       checkLimitList = checkLimitList(tunes, target);
-
+      
       if (checkLimitList)
       {
          System.out.println("Creating powerset...");
@@ -46,41 +51,57 @@ public class Foothill
             + tidy.format((stopTime - startTime) / 1e9) + " seconds.\n");
    }
 
-   public static ArrayList<Sublist> makePowerset(
-         ArrayList<iTunesEntry> list, int target)
-         throws CloneNotSupportedException
+   public static ArrayList<Sublist> makePowerset(ArrayList<iTunesEntry> list,
+         int target) throws CloneNotSupportedException
    {
       ArrayList<Sublist> powerset = new ArrayList<Sublist>();
-      powerset.add(new Sublist(list)); // add the empty set
+     
+      System.out.println("Powerset size1 =" + powerset.size());
+     
+      powerset.add(new Sublist(list));
+     
+      System.out.println("Powerset size2 =" + powerset.size());
+      int t = 0;
       int kBest = 0;
       // for every item in the original list
       for (int i = 0; i < list.size(); i++)
       {
 
          ArrayList<Sublist> newPowerset = new ArrayList<Sublist>();
+         System.out.println("newPowerset size " + newPowerset.size());
+         
          System.out.println("target = " + target + "; sum = "
                + powerset.get(kBest).getSum() + "kBest = " + kBest
-               + "highest idice = " + newPowerset.size());
+               + "highest idice = " + newPowerset.size() + "\n");
+        
          for (Sublist subset : powerset)
-         {
+         {    
 
             // copy all of the current powerset's subsets
             newPowerset.add(subset);
-
-            // plus the subsets appended with the current item
+  //          System.out.println("newPowerset size " + newPowerset.size() + " t = " + t);
+            t++;
+              // plus the subsets appended with the current item
             Sublist newSubset = new Sublist(list);
+            System.out.println("newSUBSET indices " + newSubset.getIndices());
+           
             newSubset.getIndices().addAll(subset.getIndices());
-            newSubset.addItem(i); //
+ //           System.out.println("newSUBSET indices " + newSubset.getIndices());
+            newSubset.addItem(i); 
+  //          System.out.println("newSUBSET indices " + newSubset.getIndices());
             newPowerset.add(newSubset);
+  //          System.out.println("newPowerset size " + newPowerset.size() + " t = " + t);
+  //          System.out.println("Powerset size2 =" + powerset.size());
+            
             kBest = findKBest(target, powerset);
-
+   //         System.out.println("kBest =" + kBest);
             if (powerset.get(kBest).getSum() == target)
             {
                return newPowerset;
             }
          }
 
-         // powerset is now powerset of list.subList(0, list.indexOf(item)+1)
+        // powerset is now powerset of list.subList(0, list.indexOf(item)+1)
          powerset = newPowerset;
       }
 
@@ -92,17 +113,17 @@ public class Foothill
       int max = 0;
       int kBest = 0;
       int loop = powerset.size();
-      System.out.println("Calculating kbest...");
+      System.out.println("Calculating kbest...powerset size " + powerset.size());
       for (int i = 0; i < loop; i++)
       {
          Sublist set = powerset.get(i);
+         System.out.println("set get sum" + set.getSum());
          int sum = set.getSum();
          if (sum == target)
          {
             kBest = i;
             System.out.println("The target is " + target + "\n");
             powerset.get(kBest).showSublist();
-
             System.out.println("\nwith sum of " + powerset.get(kBest).getSum());
             return kBest;
          } else
@@ -114,34 +135,33 @@ public class Foothill
                System.out.println("inside the sum > max loop target = "
                      + target + " sum is: " + sum + " max is " + max
                      + " powerest size = " + powerset.size());
-
             }
          }
       }
-
       return kBest;
    }
 
+   /**
+    * This method checks to make sure there is adequate duration of songs to
+    * achieve the target otherwise program completes
+    */
    public static boolean checkLimitList(ArrayList<iTunesEntry> list, int target)
          throws CloneNotSupportedException
    {
-
       {
          int limitSum = 0;
-
          for (int i = 0; i < list.size(); i++)
          {
             limitSum += list.get(i).getTime();
-
          }
          if (limitSum <= target)
          {
-            System.out.println("The most this grouping can sum to is: "
-                  + limitSum);
+            System.out.println("The target is " + target
+                  + ". The most this song grouping can sum to is: " + limitSum
+                  + ". Program end.");
             return false;
          }
          return true;
       }
-
    }
 }
