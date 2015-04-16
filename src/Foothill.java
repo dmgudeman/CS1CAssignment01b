@@ -56,18 +56,15 @@ public class Foothill
       int kBest = 0;
  
      
-      while (maxSum <= target)
-         {
-              // for every item in the original list
+//      while (maxSum <= target)
+//         {
+//              // for every item in the original list
              for (int i = 0; i < list.size(); i++)
              {
                 ArrayList<Sublist> newPowerset = new ArrayList<Sublist>();
 
                 for (Sublist subset : powerset)
                 {  
-             
-               
-            
                    // copy all of the current powerset's subsets
                    newPowerset.add(subset);
 
@@ -76,16 +73,18 @@ public class Foothill
                    newSubset.getIndices().addAll(subset.getIndices());
                    newSubset.addItem(i); //
            
-                     newPowerset.add(newSubset);
-                    kBest = findKBest(target, powerset);
-           
-                    System.out.println("This is kTemp " + kBest);         
+                   newPowerset.add(newSubset);
+                   kBest = findKBest(target, powerset);
+                //   newPowerset.get(kBest).getSum();
+                   
+                   System.out.println("This is kTemp " + kBest);         
                  }    
                 powerset = newPowerset;
                }  
             
-           }
-           return powerset;
+//           }
+        
+         return powerset;
       }
 
    /**
