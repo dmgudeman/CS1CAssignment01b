@@ -2,8 +2,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import cs_1c.iTunesEntry;
 import cs_1c.iTunesEntryReader;
 
@@ -14,7 +12,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 22109;
+      int target = 500;
       boolean checkLimitList = false;
    
       // for formatting and timing
@@ -24,7 +22,7 @@ public class Foothill
 
       // read the iTunes Data
       iTunesEntryReader tunesInput = new iTunesEntryReader(
-            "itunes_file.txt");
+            "itunes_file_small.txt");
 
       // test the success of the read:
       if (tunesInput.readError())
@@ -61,34 +59,53 @@ public class Foothill
       
       ArrayList<Sublist> Col = new ArrayList<Sublist>();
       Col.add(new Sublist(tunes)); // add the empty set
-      
+      int count = 0;
       outerloop:
       // for every item in the original list
       for (int i = 0; i < tunes.size(); i++)
       {
+       
          for (int j = 0; j < Col.size(); j++)
          {
-            if ((Col.get(j).getSum() + tunes.get(i).getTime()) <= target)
-            {
-               Col.add(Col.get(j).addItem(i));
-            }
-            if ((Col.get(j).getSum() + tunes.get(i).getTime()) == target)
+           
+          
+            int currentSum = Col.get(j).getSum() + tunes.get(i).getTime();
+            System.out.println("Current Sum " + currentSum);
+            if (currentSum == target)
             {
                break outerloop;
             }
+            else if (currentSum <= target)
+            {
+               int X = Col.size();
+               
+               Col.add(Col.get(j).addItem(i));
+               count++;
+               System.out.println("THIS IS PRINTED" + Col.get(count).getIndices() + "\n" );
+            } 
+           
          }
       }
-      for (int i = 0; i < Col.size(); i++)
-      {
-         if (Col.get(i).getSum() > maxTime)
-         {
-            indexOfMax = i;
-            maxTime = Col.get(i).getSum();
-            System.out.print("\nwith sum of " + Col.get(i).getSum() + "\n");
-         }        
-      } 
-      Col.get(indexOfMax).showSublist(); 
-     
+      int  finalIndex = Col.size() - 1 ;
+      System.out.println("FINAL INDEX " + finalIndex);
+    
+    
+            {
+      System.out.println("THIS IS PRINTED" + Col.get(finalIndex).getIndices() + "\n" );
+      
+            }
+//      for (int i = 0; i < Col.size(); i++)
+//      {
+//         if (Col.get(i).getSum() > maxTime)
+//         {
+//            indexOfMax = i;
+////            Col.get(indexOfMax).showSublist(); 
+//            maxTime = Col.get(i).getSum();
+//           
+//         }        
+//      } 
+      Col.get(finalIndex).showSublist(); 
+      System.out.println("maxTime = " + maxTime);
       return Col;
    }
 
