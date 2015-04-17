@@ -63,14 +63,11 @@ public class Foothill
       // for every item in the original list
       for (int i = 0; i < list.size(); i++)
       {  System.out.println("i = " +i);
-        int j=0;
-       java.util.Iterator<Sublist> itr = Col.iterator(); 
-         while(itr.hasNext() && j < Col.size())
-         {   j++;
+     
+      for (int j =0; i < Col.size(); j++)
+         {   
           Col.get(j);
-           
-             
-       
+      
             newSum = L.getSum();
             
             if (newSum == target)
@@ -86,10 +83,12 @@ public class Foothill
             
             if (newSum <= target)
             {
-            L.addItem(i);
+            L.addItem(j);
             int c = L.getSum();
+            Col.add(L);
           
              System.out.println("maxTime is:" + maxTime); 
+             L.showSublist(); 
             }        
          
             }

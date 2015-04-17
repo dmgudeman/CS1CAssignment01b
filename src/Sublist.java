@@ -6,7 +6,7 @@ class Sublist implements Cloneable
 {
    private int sum = 0;
    private ArrayList<iTunesEntry> originalObjects;
-   private ArrayList<Integer> indices = new ArrayList<Integer>();
+   private ArrayList<Integer> indices;
    
    public ArrayList<Integer> getIndices() {
       return indices;
@@ -21,6 +21,7 @@ class Sublist implements Cloneable
    {
       sum = 0;
       originalObjects = list;
+      indices = new ArrayList<Integer>();
    }
    
   
