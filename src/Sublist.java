@@ -47,7 +47,8 @@ class Sublist implements Cloneable
    Sublist addItem(int indexOfItemToAdd) throws CloneNotSupportedException
    {  
       Sublist s = (Sublist) clone();
-      s.indices.add(s.originalObjects.get(indexOfItemToAdd),(s.originalObjects.get(indexOfItemToAdd + 1)) );
+      Integer intObj = new Integer( indexOfItemToAdd);
+      s.indices.add(intObj);
       s.sum = originalObjects.get(indexOfItemToAdd).getTime() + this.sum;
       
       return s;

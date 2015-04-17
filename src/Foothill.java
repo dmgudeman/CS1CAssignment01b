@@ -14,8 +14,8 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 1200;
-      boolean checkLimitList;
+      int target = 22109;
+      boolean checkLimitList = false;
    
       // for formatting and timing
       NumberFormat tidy = NumberFormat.getInstance(Locale.US);
@@ -24,7 +24,7 @@ public class Foothill
 
       // read the iTunes Data
       iTunesEntryReader tunesInput = new iTunesEntryReader(
-            "itunes_file_small.txt");
+            "itunes_file.txt");
 
       // test the success of the read:
       if (tunesInput.readError())
@@ -39,7 +39,10 @@ public class Foothill
       checkLimitList = checkLimitList(tunes, target);
 
       // make the power set
+      if (checkLimitList)
+      {
       ArrayList<Sublist> powerset = makePowerSet(tunes, target);
+      }
       stopTime = System.nanoTime();
 
       // report algorithm time
@@ -81,9 +84,11 @@ public class Foothill
          {
             indexOfMax = i;
             maxTime = Col.get(i).getSum();
+            System.out.print("\nwith sum of " + Col.get(i).getSum() + "\n");
          }        
       } 
-      Col.get(indexOfMax).showSublist();  
+      Col.get(indexOfMax).showSublist(); 
+     
       return Col;
    }
 
