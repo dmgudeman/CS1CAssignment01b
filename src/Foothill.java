@@ -23,7 +23,8 @@ public class Foothill
       long startTime, stopTime;
 
       // read the iTunes Data
-      iTunesEntryReader tunesInput = new iTunesEntryReader("itunes_file_small.txt");
+      iTunesEntryReader tunesInput = new iTunesEntryReader(
+            "itunes_file_small.txt");
 
       // test the success of the read:
       if (tunesInput.readError())
@@ -58,48 +59,47 @@ public class Foothill
       Col.add(new Sublist(list)); // add the empty set
       Sublist S = new Sublist(list);
       Sublist L = new Sublist(list);
-     
 
       // for every item in the original list
       for (int i = 0; i < list.size(); i++)
-      {  System.out.println("i = " +i);
-     
-      for (int j =0; i < Col.size(); j++)
-         {   
-          Col.get(j);
-      
+      {
+         System.out.println("i = " + i);
+
+         for (int j = 0; j < Col.size(); j++)
+         {
+            Col.get(j);
+
             newSum = L.getSum();
-            
+
             if (newSum == target)
             {
-               L.showSublist(); 
-              return Col;
-               
+               L.showSublist();
+               return Col;
+
             }
             if (newSum < target && newSum > maxTime)
             {
                maxTime = newSum;
             }
-            
+
             if (newSum <= target)
             {
-            L.addItem(j);
-            int c = L.getSum();
-            Col.add(L);
-          
-             System.out.println("maxTime is:" + maxTime); 
-             L.showSublist(); 
-            }        
-         
+               L.addItem(j);
+               int c = L.getSum();
+               Col.add(L);
+
+               System.out.println("maxTime is:" + maxTime);
+               L.showSublist();
             }
-        
+
+         }
+
       }
-      
-      L.showSublist(); 
+
+      L.showSublist();
       return Col;
    }
-
-   
+ 
    /**
     * helper function to screen for an inadequate dataset
     */
