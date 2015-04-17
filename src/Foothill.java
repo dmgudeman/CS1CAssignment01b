@@ -16,7 +16,7 @@ public class Foothill
 
       int target = 1200;
       boolean checkLimitList;
-
+   
       // for formatting and timing
       NumberFormat tidy = NumberFormat.getInstance(Locale.US);
       tidy.setMaximumFractionDigits(4);
@@ -50,61 +50,48 @@ public class Foothill
    /**
     * Make the powerset
     */
-   public static ArrayList<Sublist> makePowerSet(ArrayList<iTunesEntry> list,
+   public static ArrayList<Sublist> makePowerSet(ArrayList<iTunesEntry> tunes,
          int target) throws CloneNotSupportedException
-   {
-      int newSum = 0;
+   { 
       int maxTime = 0;
+      int indexOfMax = 0;
+      
       ArrayList<Sublist> Col = new ArrayList<Sublist>();
-      Col.add(new Sublist(list)); // add the empty set
-      Sublist S = new Sublist(list);
-      Sublist L = new Sublist(list);
-
+      Col.add(new Sublist(tunes)); // add the empty set
+      
+      outerloop:
       // for every item in the original list
-      for (int i = 0; i < list.size(); i++)
+      for (int i = 0; i < tunes.size(); i++)
       {
-         System.out.println("i = " + i);
-
          for (int j = 0; j < Col.size(); j++)
          {
-            Col.get(j);
-
-            newSum = L.getSum();
-
-            if (newSum == target)
+            if ((Col.get(j).getSum() + tunes.get(i).getTime()) <= target)
             {
-               L.showSublist();
-               return Col;
-
+               Col.add(Col.get(j).addItem(i));
             }
-            if (newSum < target && newSum > maxTime)
+            if ((Col.get(j).getSum() + tunes.get(i).getTime()) == target)
             {
-               maxTime = newSum;
+               break outerloop;
             }
-
-            if (newSum <= target)
-            {
-               L.addItem(j);
-               int c = L.getSum();
-               Col.add(L);
-
-               System.out.println("maxTime is:" + maxTime);
-               L.showSublist();
-            }
-
          }
-
       }
-
-      L.showSublist();
+      for (int i = 0; i < Col.size(); i++)
+      {
+         if (Col.get(i).getSum() > maxTime)
+         {
+            indexOfMax = i;
+            maxTime = Col.get(i).getSum();
+         }        
+      } 
+      Col.get(indexOfMax).showSublist();  
       return Col;
    }
- 
+
    /**
     * helper function to screen for an inadequate dataset
     */
-   public static boolean checkLimitList(ArrayList<iTunesEntry> tunes, int target)
-         throws CloneNotSupportedException
+   public static boolean checkLimitList(ArrayList<iTunesEntry> tunes, 
+         int target) throws CloneNotSupportedException
    {
       int limitSum = 0;
 

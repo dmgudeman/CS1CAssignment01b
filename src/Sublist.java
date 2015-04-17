@@ -24,8 +24,6 @@ class Sublist implements Cloneable
       indices = new ArrayList<Integer>();
    }
    
-  
-
    public int getSum()
    {
       return sum;
@@ -46,16 +44,13 @@ class Sublist implements Cloneable
       return newObject;
    }
    
-   Sublist addItem( int indexOfItemToAdd ) throws CloneNotSupportedException
+   Sublist addItem(int indexOfItemToAdd) throws CloneNotSupportedException
    {  
-       
+      Sublist s = (Sublist) clone();
+      s.indices.add(s.originalObjects.get(indexOfItemToAdd),(s.originalObjects.get(indexOfItemToAdd + 1)) );
+      s.sum = originalObjects.get(indexOfItemToAdd).getTime() + this.sum;
       
-     this.indices.add(indexOfItemToAdd);
-    Sublist s = (Sublist) clone();
-      this.sum = originalObjects.get(indexOfItemToAdd).getTime() + this.sum;
-    
-     return s;
-     
+      return s;
    }
      
    void showSublist(){ 
