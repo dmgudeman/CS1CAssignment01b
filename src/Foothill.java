@@ -2,6 +2,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 import cs_1c.iTunesEntry;
 import cs_1c.iTunesEntryReader;
 
@@ -12,7 +14,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 3600;
+      int target = 1200;
       boolean checkLimitList;
 
       // for formatting and timing
@@ -21,7 +23,7 @@ public class Foothill
       long startTime, stopTime;
 
       // read the iTunes Data
-      iTunesEntryReader tunesInput = new iTunesEntryReader("itunes_file.txt");
+      iTunesEntryReader tunesInput = new iTunesEntryReader("itunes_file_small.txt");
 
       // test the success of the read:
       if (tunesInput.readError())
@@ -50,74 +52,55 @@ public class Foothill
    public static ArrayList<Sublist> makePowerSet(ArrayList<iTunesEntry> list,
          int target) throws CloneNotSupportedException
    {
-      ArrayList<Sublist> powerset = new ArrayList<Sublist>();
-      powerset.add(new Sublist(list)); // add the empty set
-      int maxSum = 0;
-      int kBest = 0;
- 
+      int newSum = 0;
+      int maxTime = 0;
+      ArrayList<Sublist> Col = new ArrayList<Sublist>();
+      Col.add(new Sublist(list)); // add the empty set
+      Sublist S = new Sublist(list);
+      Sublist L = new Sublist(list);
      
-//      while (maxSum <= target)
-//         {
-//              // for every item in the original list
-             for (int i = 0; i < list.size(); i++)
-             {
-                ArrayList<Sublist> newPowerset = new ArrayList<Sublist>();
 
-                for (Sublist subset : powerset)
-                {  
-                   // copy all of the current powerset's subsets
-                   newPowerset.add(subset);
-
-                   // plus the subsets appended with the current item
-                   Sublist newSubset = new Sublist(list);
-                   newSubset.getIndices().addAll(subset.getIndices());
-                   newSubset.addItem(i); //
+      // for every item in the original list
+      for (int i = 0; i < list.size(); i++)
+      {  System.out.println("i = " +i);
+        int j=0;
+       java.util.Iterator<Sublist> itr = Col.iterator(); 
+         while(itr.hasNext() && j < Col.size())
+         {   j++;
+          Col.get(j);
            
-                   newPowerset.add(newSubset);
-                   kBest = findKBest(target, powerset);
-                //   newPowerset.get(kBest).getSum();
-                   
-                   System.out.println("This is kTemp " + kBest);         
-                 }    
-                powerset = newPowerset;
-               }  
+             
+       
+            newSum = L.getSum();
             
-//           }
-        
-         return powerset;
-      }
-
-   /**
-    * This filters the powerset for the highest value
-    */
-   private static int findKBest(int target, ArrayList<Sublist> powerset)
-   {
-      int max = 0;
-      int kBest = 0;
-      for (int i = 0; i < powerset.size(); i++)
-      {
-         Sublist set = powerset.get(i);
-         int sum = set.getSum();
-         if (sum == target )
-         {
-            kBest = i;
-            System.out.println("The target is " + target + "\n");
-            powerset.get(kBest).showSublist();
-
-            System.out.println("\nwith sum of " + powerset.get(kBest).getSum());
-            return kBest;
-         } else
-         {
-            if (sum > max && sum <= target)
+            if (newSum == target)
             {
-               max = sum;
-               kBest = i;
+               L.showSublist(); 
+              return Col;
+               
             }
-         }
+            if (newSum < target && newSum > maxTime)
+            {
+               maxTime = newSum;
+            }
+            
+            if (newSum <= target)
+            {
+            L.addItem(i);
+            int c = L.getSum();
+          
+             System.out.println("maxTime is:" + maxTime); 
+            }        
+         
+            }
+        
       }
-      return kBest;
+      
+      L.showSublist(); 
+      return Col;
    }
 
+   
    /**
     * helper function to screen for an inadequate dataset
     */
