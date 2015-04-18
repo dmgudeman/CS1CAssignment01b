@@ -12,7 +12,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 700;
+      int target = 1000;
       boolean checkLimitList = false;
 
       // for formatting and timing
@@ -67,7 +67,7 @@ public class Foothill
      
       outerloop:
       // for every item in the original list
-      for (int j = 0; j < tunes.size(); j++)
+      for (int j = 0; j < Col.size(); j++)
       {
          for (int i = 0; i < tunes.size(); i++)
          {   
@@ -123,7 +123,7 @@ public class Foothill
        
 
       }
-      Col.get(finalIndex).showSublist();
+  //    Col.get(finalIndex).showSublist();
       System.out.println("THE FINAL MAXSUM =" + maxSum);
       return Col;
    }
