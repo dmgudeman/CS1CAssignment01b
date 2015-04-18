@@ -12,7 +12,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 1000;
+      int target = 700;
       boolean checkLimitList = false;
 
       // for formatting and timing
@@ -82,10 +82,7 @@ public class Foothill
 
             else if (currentSum <= target)
             {  
-               System.out.println("WHATS THIS " +Col.get(j).getIndices().contains(tunes.get(i)));
-               // filters out adding duplicates
-         //      if (!Col.get(j).getIndices().contains(tunes.get(i)))
-             //  {
+               
                   System.out.println("ITS WORKING");
 
                   int X = Col.size();
@@ -123,7 +120,7 @@ public class Foothill
        
 
       }
-  //    Col.get(finalIndex).showSublist();
+      Col.get(finalIndex).showSublist();
       System.out.println("THE FINAL MAXSUM =" + maxSum);
       return Col;
    }
