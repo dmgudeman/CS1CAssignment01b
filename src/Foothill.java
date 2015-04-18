@@ -72,7 +72,7 @@ public class Foothill
          for (int i = 0; i < tunes.size(); i++)
          {   
             currentSum = Col.get(j).getSum() + tunes.get(i).getTime();
-            System.out.println("Current Sum  AT TOP" + currentSum);
+         
            
             
             if (currentSum == target)
@@ -89,7 +89,7 @@ public class Foothill
                     Col.add(Col.get(j).addItem(i));
                 
                
-                
+           System.out.println(Col.get(i).getIndices());     
                  
                   count++;
                   
@@ -103,7 +103,7 @@ public class Foothill
       int calcSum =0;
       int finalIndex = 0;
 
-      for (int i = 0; i <= tunes.size(); i++)
+      for (int i = 0; i <= Col.size(); i++)
       {
          calcSum = Col.get(i).getSum();
          
@@ -112,7 +112,9 @@ public class Foothill
             finalSum = calcSum;
             
             finalIndex = i;
+           
             Col.get(i).showSublist();
+            
          }
       }
 
@@ -122,7 +124,7 @@ public class Foothill
        
 
       }
-   
+      System.out.println("The final tally: " + finalSum);
       return Col;
     
    }
