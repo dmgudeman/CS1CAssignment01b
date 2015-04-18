@@ -12,7 +12,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 1664 ;
+      int target = 3400;
       boolean checkLimitList = false;
 
       // for formatting and timing
@@ -49,56 +49,66 @@ public class Foothill
    }
 
    /**
-    * Make the powerset
+    * Construct and test the powerset and determine the Sublist that 
+    * has the closet value smaller or equal to the target
     */
    public static ArrayList<Sublist> makePowerSet(ArrayList<iTunesEntry> tunes,
          int target) throws CloneNotSupportedException
    {
-
-    
       int currentSum = 0;
 
       ArrayList<Sublist> Col = new ArrayList<Sublist>();
       Col.add(new Sublist(tunes)); // add the empty set
-
+    
       outerloop:
-      // for every item in the original list
+      // loop through the powerset
       for (int j = 0; j < Col.size(); j++)
-      {
+      {   
+         // loop through the data
          for (int i = 0; i < tunes.size(); i++)
-         {
+         {  
+            // determine what the value could be
             currentSum = Col.get(j).getSum() + tunes.get(i).getTime();
-
+            
+            // add it to the sublist if it is appropriate
             if (currentSum <= target)
             {
                Col.add(Col.get(j).addItem(i));
 
+               // break out of the loop if target is achieved
                if (currentSum == target)
                {
                   break outerloop;
                }
             }
-         }
+         }  
+
       }
+      // calculate and display the outcome
       int finalSum = 0;
       int calcSum = 0;
       int finalIndex = 0;
-
+      
+      //loop through the powerset
       for (int i = 0; i < Col.size(); i++)
-      {
+      {  
+         // obatain and compare the time value of the sublist
          calcSum = Col.get(i).getSum();
-         Col.get(i).getIndices();
-
+ 
          if (calcSum > finalSum && calcSum <= target)
-         {
-            finalSum = calcSum;
-
-            finalIndex = i;
+         {  
+            // determine the highest value of time
+            finalSum = calcSum;  
+            
+            //note the index
+            finalIndex =i;
          }
-      }
+      }   
       System.out.println("The target is : "+ target + "\n");
+      
+      // use the index to pull out the return from the sublist
       Col.get(finalIndex).showSublist();
-      System.out.println("Sum: " + finalSum);
+      System.out.println("\nSum: " + finalSum);
       return Col;
    }
 
