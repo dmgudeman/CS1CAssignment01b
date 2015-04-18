@@ -52,8 +52,7 @@ class Sublist implements Cloneable
       // wrapper for the primitive variable
       Integer intObj = new Integer(indexOfItemToAdd);
     s.indices.add(intObj);
-    
-      
+
       s.sum = originalObjects.get(indexOfItemToAdd).getTime() + this.sum;
       
       return s;

@@ -12,7 +12,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 700;
+      int target = 1000;
       boolean checkLimitList = false;
 
       // for formatting and timing
@@ -75,23 +75,25 @@ public class Foothill
             System.out.println("Current Sum  AT TOP" + currentSum);
             System.out.println("Current Index = " + Col.indexOf(Col.get(j)));
             
-            if (currentSum == target)
-            {
-               break outerloop;
-            }
+          
 
-            else if (currentSum <= target)
+           if (currentSum <= target)
             {  
                
                   System.out.println("ITS WORKING");
 
                   int X = Col.size();
-          //        Col.get(j).getIndices().contains(tunes.get(i));
+              if (!Col.get(j).getIndices().contains(tunes.get(i)))
+                    {
                   Col.add(Col.get(j).addItem(i));
                 
-                  System.out.println("Current Sum  IN MIDDLE" + currentSum2);
-                  
-                  if (currentSum > maxSum)
+                  System.out.println("Current Sum  IN MIDDLE" + Col.get(j).getSum());
+                    }
+              if (currentSum == target)
+              {
+                 break outerloop;
+              }
+              else if (currentSum > maxSum)
                   {
                     maxSum = currentSum;
                     indexOfMax = j;
@@ -110,18 +112,32 @@ public class Foothill
          
       }
    
-      int finalIndex = Col.size() - 1;
-      System.out.println("FINAL INDEX " + finalIndex);
-      System.out.println(Col.get(finalIndex).getIndices());
+     
 
       {
-         System.out.println("THIS IS PRINTED"
-               + Col.get(finalIndex).getIndices() + "\n");
+       
        
 
       }
+      int finalSum = 0;
+      int calcSum =0;
+      int finalIndex = 0;
+
+      for (int i = 0; i < Col.size(); i++)
+      {
+         calcSum = Col.get(i).getSum();
+         
+         if (calcSum > finalSum && calcSum <= target)
+         {
+            finalSum = calcSum;
+            
+            finalIndex = i;
+                 
+         }
+        
+      }
       Col.get(finalIndex).showSublist();
-      System.out.println("THE FINAL MAXSUM =" + maxSum);
+      System.out.println("Sum: " + finalSum);
       return Col;
    }
 
