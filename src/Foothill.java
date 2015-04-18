@@ -12,7 +12,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 1868;
+      int target = 1500;
       boolean checkLimitList = false;
 
       // for formatting and timing
