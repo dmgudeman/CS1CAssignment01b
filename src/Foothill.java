@@ -12,9 +12,9 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 500;
+      int target = 700;
       boolean checkLimitList = false;
-   
+
       // for formatting and timing
       NumberFormat tidy = NumberFormat.getInstance(Locale.US);
       tidy.setMaximumFractionDigits(4);
@@ -39,7 +39,7 @@ public class Foothill
       // make the power set
       if (checkLimitList)
       {
-      ArrayList<Sublist> powerset = makePowerSet(tunes, target);
+         ArrayList<Sublist> powerset = makePowerSet(tunes, target);
       }
       stopTime = System.nanoTime();
 
@@ -53,67 +53,86 @@ public class Foothill
     */
    public static ArrayList<Sublist> makePowerSet(ArrayList<iTunesEntry> tunes,
          int target) throws CloneNotSupportedException
-   { 
+   {
       int maxTime = 0;
       int indexOfMax = 0;
-      
+      int maxSum = 0;
+      int currentSum = 0;
+      int currentSum2 = 0;
+      int count = 0;
+
       ArrayList<Sublist> Col = new ArrayList<Sublist>();
       Col.add(new Sublist(tunes)); // add the empty set
-      int count = 0;
+     
+     
       outerloop:
       // for every item in the original list
-      for (int i = 0; i < tunes.size(); i++)
+      for (int j = 0; j < tunes.size(); j++)
       {
-       
-         for (int j = 0; j < Col.size(); j++)
-         {
-           
-          
-            int currentSum = Col.get(j).getSum() + tunes.get(i).getTime();
-            System.out.println("Current Sum " + currentSum);
+         for (int i = 0; i < tunes.size(); i++)
+         {   
+            currentSum = Col.get(j).getSum() + tunes.get(i).getTime();
+            System.out.println("Current Sum  AT TOP" + currentSum);
+            System.out.println("Current Index = " + Col.indexOf(Col.get(j)));
+            
             if (currentSum == target)
             {
                break outerloop;
             }
+
             else if (currentSum <= target)
-            {
-               int X = Col.size();
-               
-               Col.add(Col.get(j).addItem(i));
-               count++;
-               System.out.println("THIS IS PRINTED" + Col.get(count).getIndices() + "\n" );
-            } 
-           
-         }
-      }
-      int  finalIndex = Col.size() - 1 ;
-      System.out.println("FINAL INDEX " + finalIndex);
-    
-    
-            {
-      System.out.println("THIS IS PRINTED" + Col.get(finalIndex).getIndices() + "\n" );
-      
+            {  
+               System.out.println("WHATS THIS " +Col.get(j).getIndices().contains(tunes.get(i)));
+               // filters out adding duplicates
+         //      if (!Col.get(j).getIndices().contains(tunes.get(i)))
+             //  {
+                  System.out.println("ITS WORKING");
+
+                  int X = Col.size();
+          //        Col.get(j).getIndices().contains(tunes.get(i));
+                  Col.add(Col.get(j).addItem(i));
+                
+                  System.out.println("Current Sum  IN MIDDLE" + currentSum2);
+                  
+                  if (currentSum > maxSum)
+                  {
+                    maxSum = currentSum;
+                    indexOfMax = j;
+                    System.out.println("maxSum = " + maxSum + ", indexOfMax = "+ indexOfMax + "count =****************************************"+ count);
+                  }
+                 
+                  count++;
+                  
+                  System.out.println("THIS IS PRINTED"
+                        + Col.get(count).getIndices() + "\n");
+                  System.out.println("currentSum= " + currentSum);
+             //  }
             }
-//      for (int i = 0; i < Col.size(); i++)
-//      {
-//         if (Col.get(i).getSum() > maxTime)
-//         {
-//            indexOfMax = i;
-////            Col.get(indexOfMax).showSublist(); 
-//            maxTime = Col.get(i).getSum();
-//           
-//         }        
-//      } 
-      Col.get(finalIndex).showSublist(); 
-      System.out.println("maxTime = " + maxTime);
+
+         }
+         
+      }
+   
+      int finalIndex = Col.size() - 1;
+      System.out.println("FINAL INDEX " + finalIndex);
+      System.out.println(Col.get(finalIndex).getIndices());
+
+      {
+         System.out.println("THIS IS PRINTED"
+               + Col.get(finalIndex).getIndices() + "\n");
+       
+
+      }
+      Col.get(finalIndex).showSublist();
+      System.out.println("THE FINAL MAXSUM =" + maxSum);
       return Col;
    }
 
    /**
     * helper function to screen for an inadequate dataset
     */
-   public static boolean checkLimitList(ArrayList<iTunesEntry> tunes, 
-         int target) throws CloneNotSupportedException
+   public static boolean checkLimitList(ArrayList<iTunesEntry> tunes, int target)
+         throws CloneNotSupportedException
    {
       int limitSum = 0;
 
