@@ -12,7 +12,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 3000;
+      int target = 1000;
       boolean checkLimitList = false;
 
       // for formatting and timing
@@ -92,20 +92,19 @@ public class Foothill
                {
                   maxSum = currentSum;
                   done = false;
-//                  System.out.println("maxSum = " + maxSum + ", indexOfMax = "
-//                        + indexOfMax
-//                        + "count =****************************************"
-//                        + count);
+                  System.out.println("maxSum = " + maxSum + ", indexOfMax = "
+                        + indexOfMax
+                        + "count =****************************************"
+                        + count);
                }
 
                count++;
 
-              
-//               System.out.println("currentSum= " + currentSum);
-               // }
             }
          
          }
+       //  Col.get(index)
+         System.out.println("THis is printed");
          System.out.println("THIS IS the end"
                + Col.get(count).getIndices() + "\n");
          Col.get(count).showSublist();
@@ -118,26 +117,7 @@ public class Foothill
        
 
       }
-//      int finalSum = 0;
-//      int calcSum =0;
-//      int finalIndex = 0;
-//
-//      for (int i = 0; i < Col.size(); i++)
-//      {
-//         calcSum = Col.get(i).getSum();
-//         
-//         if (calcSum > finalSum && calcSum <= target)
-//         {
-//            finalSum = calcSum;
-//        
-//            
-//          System.out.println(Col.get(i).getIndices());     
-//                 
-//         }
-        
-//      }
-//      Col.get(i)   .showSublist();
-//      System.out.println("Sum: " + finalSum);
+
       return Col;
    }
 
