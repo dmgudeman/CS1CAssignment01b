@@ -12,7 +12,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 700;
+      int target = 1868;
       boolean checkLimitList = false;
 
       // for formatting and timing
@@ -73,7 +73,7 @@ public class Foothill
          {   
             currentSum = Col.get(j).getSum() + tunes.get(i).getTime();
             System.out.println("Current Sum  AT TOP" + currentSum);
-            System.out.println("Current Index = " + Col.indexOf(Col.get(j)));
+           
             
             if (currentSum == target)
             {
@@ -82,50 +82,49 @@ public class Foothill
 
             else if (currentSum <= target)
             {  
-               System.out.println("WHATS THIS " +Col.get(j).getIndices().contains(tunes.get(i)));
-               // filters out adding duplicates
-         //      if (!Col.get(j).getIndices().contains(tunes.get(i)))
-             //  {
-                  System.out.println("ITS WORKING");
-
-                  int X = Col.size();
-          //        Col.get(j).getIndices().contains(tunes.get(i));
-                  Col.add(Col.get(j).addItem(i));
+         
+        
                 
-                  System.out.println("Current Sum  IN MIDDLE" + currentSum2);
-                  
-                  if (currentSum > maxSum)
-                  {
-                    maxSum = currentSum;
-                    indexOfMax = j;
-                    System.out.println("maxSum = " + maxSum + ", indexOfMax = "+ indexOfMax + "count =****************************************"+ count);
-                  }
+
+                    Col.add(Col.get(j).addItem(i));
+                
+               
+                
                  
                   count++;
                   
-                  System.out.println("THIS IS PRINTED"
-                        + Col.get(count).getIndices() + "\n");
-                  System.out.println("currentSum= " + currentSum);
-             //  }
+                
             }
 
          }
          
       }
-   
-      int finalIndex = Col.size() - 1;
-      System.out.println("FINAL INDEX " + finalIndex);
-      System.out.println(Col.get(finalIndex).getIndices());
+      int finalSum = 0;
+      int calcSum =0;
+      int finalIndex = 0;
+
+      for (int i = 0; i <= tunes.size(); i++)
+      {
+         calcSum = Col.get(i).getSum();
+         
+         if (calcSum > finalSum && calcSum <= target)
+         {
+            finalSum = calcSum;
+            
+            finalIndex = i;
+            Col.get(i).showSublist();
+         }
+      }
+
 
       {
-         System.out.println("THIS IS PRINTED"
-               + Col.get(finalIndex).getIndices() + "\n");
+        
        
 
       }
-      Col.get(finalIndex).showSublist();
-      System.out.println("THE FINAL MAXSUM =" + maxSum);
+   
       return Col;
+    
    }
 
    /**
