@@ -12,7 +12,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 1000;
+      int target = 1500;
       boolean checkLimitList = false;
 
       // for formatting and timing
@@ -22,7 +22,7 @@ public class Foothill
 
       // read the iTunes Data
       iTunesEntryReader tunesInput = new iTunesEntryReader(
-            "itunes_file_small.txt");
+            "itunes_file.txt");
 
       // test the success of the read:
       if (tunesInput.readError())
@@ -60,7 +60,8 @@ public class Foothill
       int currentSum = 0;
       int currentSum2 = 0;
       int count = 0;
-
+      int x = -1;
+      boolean done = false;
       ArrayList<Sublist> Col = new ArrayList<Sublist>();
       Col.add(new Sublist(tunes)); // add the empty set
      
@@ -68,44 +69,46 @@ public class Foothill
       outerloop:
       // for every item in the original list
       for (int j = 0; j < Col.size(); j++)
-      {
+      {    
+//         if (done = true) break outerloop;
+      
          for (int i = 0; i < tunes.size(); i++)
-         {   
+         {  
             currentSum = Col.get(j).getSum() + tunes.get(i).getTime();
-            System.out.println("Current Sum  AT TOP" + currentSum);
-            System.out.println("Current Index = " + Col.indexOf(Col.get(j)));
-            
           
+          
+            if ( currentSum <= target || currentSum < maxSum)
+            {   
 
-           if (currentSum <= target)
-            {  
-               
-                  System.out.println("ITS WORKING");
+ 
 
-                  int X = Col.size();
-              if (!Col.get(j).getIndices().contains(tunes.get(i)))
-                    {
+            
+               if (!Col.get(j).getIndices().contains(tunes.get(i)))
+               {
                   Col.add(Col.get(j).addItem(i));
-                
-                  System.out.println("Current Sum  IN MIDDLE" + Col.get(j).getSum());
-                    }
-              if (currentSum == target)
-              {
-                 break outerloop;
-              }
-              else if (currentSum > maxSum)
-                  {
-                    maxSum = currentSum;
-                    indexOfMax = j;
-                    System.out.println("maxSum = " + maxSum + ", indexOfMax = "+ indexOfMax + "count =****************************************"+ count);
-                  }
-                 
-                  count++;
-                  
-                  System.out.println("THIS IS PRINTED"
-                        + Col.get(count).getIndices() + "\n");
-                  System.out.println("currentSum= " + currentSum);
-             //  }
+
+                  System.out.println("Current Sum  IN MIDDLE"
+                        + Col.get(j).getSum());
+               }
+               if (currentSum == target)
+               {
+                  break outerloop;
+               } else if (currentSum > maxSum)
+               {
+                  maxSum = currentSum;
+                  done = false;
+                  System.out.println("maxSum = " + maxSum + ", indexOfMax = "
+                        + indexOfMax
+                        + "count =****************************************"
+                        + count);
+               }
+
+               count++;
+
+               System.out.println("THIS IS PRINTED"
+                     + Col.get(count).getIndices() + "\n");
+               System.out.println("currentSum= " + currentSum);
+               // }
             }
 
          }
