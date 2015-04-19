@@ -13,9 +13,10 @@ class Sublist implements Cloneable
       return indices;
    }
 
-   public void setIndices(ArrayList<Integer> indices)
+   public boolean setIndices(ArrayList<Integer> indices)
    {
       this.indices = indices;
+      return true;
    }
 
    // constructor creates an empty Sublist (no indices)
@@ -31,10 +32,11 @@ class Sublist implements Cloneable
       return sum;
    }
 
-   public void setSum(int sum)
+   public boolean setSum(int sum)
    {
       if (sum >= 0)
          this.sum = sum;
+      return true;
 
    }
 
@@ -57,11 +59,12 @@ class Sublist implements Cloneable
       Integer intObj = new Integer(indexOfItemToAdd);
       s.indices.add(intObj);
 
+      // add the time
       s.sum = originalObjects.get(indexOfItemToAdd).getTime() + this.sum;
 
       return s;
    }
-
+   // show the output 
    void showSublist()
    {
       for (int i = 0; i < indices.size(); i++)
@@ -69,7 +72,5 @@ class Sublist implements Cloneable
          System.out.println(" [" + indices.get(i) + "]" + " ["
                + originalObjects.get(indices.get(i).intValue()) + "]");
       }
-
    }
-
 };

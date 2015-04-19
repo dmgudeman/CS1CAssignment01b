@@ -12,7 +12,7 @@ public class Foothill
    public static void main(String[] args) throws Exception
    {
 
-      int target = 3400;
+      int target = 500000;
       boolean checkLimitList = false;
 
       // for formatting and timing
@@ -56,24 +56,25 @@ public class Foothill
          int target) throws CloneNotSupportedException
    {
       int currentSum = 0;
-
+      int i = -1;
       ArrayList<Sublist> Col = new ArrayList<Sublist>();
       Col.add(new Sublist(tunes)); // add the empty set
-    
+      
       outerloop:
       // loop through the powerset
-      for (int j = 0; j < Col.size(); j++)
+      for (int j = 0; j < tunes.size(); j++)
       {   
          // loop through the data
-         for (int i = 0; i < tunes.size(); i++)
+          i++;
+         for ( i = 0; i < Col.size(); i++)
          {  
             // determine what the value could be
-            currentSum = Col.get(j).getSum() + tunes.get(i).getTime();
+            currentSum = Col.get(i).getSum() + tunes.get(j).getTime();
             
             // add it to the sublist if it is appropriate
             if (currentSum <= target)
             {
-               Col.add(Col.get(j).addItem(i));
+               Col.add(Col.get(i).addItem(j));
 
                // break out of the loop if target is achieved
                if (currentSum == target)
@@ -90,10 +91,10 @@ public class Foothill
       int finalIndex = 0;
       
       //loop through the powerset
-      for (int i = 0; i < Col.size(); i++)
+      for (int k = 0; k < Col.size(); k++)
       {  
          // obatain and compare the time value of the sublist
-         calcSum = Col.get(i).getSum();
+         calcSum = Col.get(k).getSum();
  
          if (calcSum > finalSum && calcSum <= target)
          {  
@@ -101,7 +102,7 @@ public class Foothill
             finalSum = calcSum;  
             
             //note the index
-            finalIndex =i;
+            finalIndex = k;
          }
       }   
       System.out.println("The target is : "+ target + "\n");
